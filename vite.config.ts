@@ -3,6 +3,8 @@ import vue from "@vitejs/plugin-vue";
 import * as path from "path";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
+import Unocss from "unocss/vite";
+import UnocssIcons from "@unocss/preset-icons";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -21,6 +23,17 @@ export default defineConfig({
         filepath: "./.eslintrc-auto-import.json",
         globalsPropValue: true,
       },
+    }),
+    Unocss({
+      presets: [
+        UnocssIcons({
+          prefix: "i-",
+          scale: 1.5,
+          extraProperties: {
+            display: "inline-block",
+          },
+        }),
+      ],
     }),
   ],
   resolve: {

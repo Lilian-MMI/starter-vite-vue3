@@ -1,1 +1,1 @@
-export { useWindowSize } from "./use-window-size";
+export * as UseClipboard from "./use-clipboard";

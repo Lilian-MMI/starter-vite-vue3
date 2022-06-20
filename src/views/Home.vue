@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from "@/stores";
-import { useWindowSize } from "@/composables";
+import { UseClipboard } from "@/composables";
 import { userApi } from "@/api";
 
 const userStore = useUserStore();
@@ -8,7 +8,7 @@ const logme = () => userStore.logMe();
 
 const { currentUser } = storeToRefs(userStore);
 
-const { width, height } = useWindowSize();
+const { text, copy, isSupported, copied } = UseClipboard;
 
 const userGetByApi = ref();
 const callApi = async () => (userGetByApi.value = await userApi.getUser("1"));
@@ -22,11 +22,10 @@ const callApi = async () => (userGetByApi.value = await userApi.getUser("1"));
 
   user store : {{ currentUser }}
 
-  <br />
-
-  composable resize : {{ width }}x{{ height }}
-
-  <br />
+  <button @click="copy()">
+    <span v-if="!copied">Copy {{ text }}</span>
+    <span v-else>Copied!</span>
+  </button>
 
   <button @click="callApi">CALL API</button>
 
